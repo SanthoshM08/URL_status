@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>URL Status Checker</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #eef2f5;
+    }
+    .card {
+      width: 420px;
+      margin: 120px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 12px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>URL Status Checker</h2>
+  <input id="url" placeholder="https://example.com" />
+  <button onclick="checkUrl()">Check</button>
+  <pre id="result"></pre>
+</div>
+
+<script>
+  function checkUrl() {
+    const url = document.getElementById("url").value;
+    fetch(`/check?url=${encodeURIComponent(url)}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").textContent =
+          JSON.stringify(data, null, 2);
+      });
+  }
+</script>
+
+</body>
+</html>
